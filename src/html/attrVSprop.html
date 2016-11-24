@@ -16,18 +16,60 @@
 	<title>attr vs prop</title>
 </head>
 <body>
-		<input type="radio" name="radio" >
+		<input type="checkbox" name="radio"  >
+			<input type="radio" name="radio 1322" >
+				<input type="radio" name="radio 332434" >
+				<table class="fn-table fn-W600">
+					<tbody>
+						<tr>
+							<td>
+								<table>
+									<tr>
+										<td></td>
+									</tr>
+								</table>
+							</td>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>5</td>
+
+
+
+							<td>6</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+						</tr>
+					</tbody>
+				</table>
 		<script type="text/javascript">
 			$(function(){
 				var radio = $('[name="radio"]');
 				//方法一：
-				radio.attr('checked',false)
+				radio.click(function(e){
+					//attr 方法 如果没有设定元素的checked属性或者没有把checked属性写在元素上是获取不到它的值值返回undefined
+					//radio.attr("checked",true)的时候再去获取radio.attr("checked") //返回'checked';
+					//radio.attr("checked",false)的时候再去获取radio.attr("checked")//返回undefined;
+					console.log($(e.target).attr("checked"))
+					console.log($(e.target).prop("checked"))//返回 true或 false;
+				})
+				//radio.attr('checked',false)
 				console.log(radio.attr('checked') === true,radio.attr('checked')) //false,undefined  checked为已选的时候attr返回的是字符串"checked" checked为未选的时候返回的是undefined;
 				//方法二:
-				radio.prop("checked",false);
+				//radio.prop("checked",false);
 				console.log(radio.prop('checked') === true,radio.prop('checked')) //false ,false prop()返回的是boolean值,没有勾选的时候返回false 已选的时候返回true
 
 				//所以操作一些自由属性中返回的是boolean值的时候用prop()方法不建议用attr()方法！
+				//!!!attr和prop的区别 attr适用于一些自定义属性的获取和设定，返回值为字符串，如果获取的属性没找到则返回undefined,prop适用于操作一些元素自带的属性比如checked disabled selected 这些属性返回的是boolean值 true 或者false;而且是元素自带属性不用写在元素上，就可以获取到！
+				console.log( $('input[name*="radio"]'))
+				console.log( $('input[name~="radio"]'))//这个radio后面必须是以空格分隔的！
+				console.log( $('.fn-table>tbody>tr>td').length);//9
+				console.log( $('.fn-table td').length)//10
 
 			})
 		</script>
