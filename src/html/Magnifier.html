@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <!-- 手机头部设置 -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>放大镜效果</title>
+	  <!-- 公用的css-->
+    <link rel="stylesheet" href="/src/css/main.css" type="text/css">
+    <!-- 公用js-->
+	<script type="text/javascript" charset="utf-8" src="/src/js/libs/jQuery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/src/js/libs/sea.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/src/js/libs/config.js"></script>
+</head>
+<body style="background-color:#ddd">
+	<div class="fn-W1000 fn-BGC-FFF fn-H650" style="padding-top:20px;margin:200px auto;">
+			<div class=" fn-H400" style="width:820px;margin:0 auto;border:1px solid #ddd;padding:10px;position:relative;">
+				<div id="outBox" class="fn-W400" style="position:relative;">
+					<img src="../image/small1.jpg" >
+					<span id="innerBox" class="fn-W200  fn-PosAbs" style="display:block;height:200px;top:0px;background:url('../image/bgColor.png') repeat;visibility:hidden;"></span>
+				</div>
+				<div id="BgImageBox" class="fn-W400 fn-H400 fn-PosAbs" style="top:10px;left:430px;overflow:hidden;">
+					<img id="BgImage" src="../image/bigImage.jpg" class="fn-PosAbs" style="top:0px;left:0px;visibility:hidden;"  >
+				</div>
+			</div>
+	</div>
+	<script type="text/javascript">
+	var mainObject = {
+		init:function(mainParam){
+			var me = this;
+			var main = this.m = mainParam || {
+				outBox : null/*document.getElementById("#outBox")*/,
+				innerBox : null/*document.getElementById("#innerBox")*/,
+				BgImage : null/*document.getElementById("#BgImage")*/,
+				BgImageBox : null/*document.getElementById("#BgImageBox")*/,
+				scale:2
+			};
+			main.innerBox.mouseover = me.start;
+		},
+		start:function(){
+
+		},
+		css:function(element,props){
+			if(props){
+				for(var i in props){
+					element.style[i] = props[i];
+				};
+			};
+			return element;
+		},
+	}
+	</script>
+</body>
+</html>

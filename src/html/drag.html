@@ -49,7 +49,14 @@
         <a class="div4" style="left:800px;top:300px;"></a>
         <a class="div5" style="left:450px;top:550px;"></a>
     </div>
+
+    <div class="fn-MT20 fn-H60" title="111" onclick="clickFn(this)">
+        test
+    </div>
     <script type="text/javascript">
+    function clickFn(ea){
+        console.log(ea.title)
+    }
     //给所有div的父级container添加事件，运用事件冒泡
     $(function() {
         var content = $(container),
