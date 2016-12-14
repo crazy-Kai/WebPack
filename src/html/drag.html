@@ -59,6 +59,16 @@
     }
     //给所有div的父级container添加事件，运用事件冒泡
     $(function() {
+        $(container).on("mouseover",function(e){
+            console.log(1111)
+        }).on("mouseout",function(e){
+            console.log(2222)
+        })
+        $("#container a").on("mouseover",function(e){
+            e.stopPropagation()
+        }).on("mouseout",function(e){
+            e.stopPropagation()
+        })
         var content = $(container),
             targetElment = null, //触发事件的目标元素
             startOffset = null, //目标元素的offset值
