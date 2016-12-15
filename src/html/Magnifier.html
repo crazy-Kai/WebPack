@@ -24,11 +24,11 @@
             <div id="outBox" style="position:relative;width:400px;height:400px;">
                 <img src="../image/small1.jpg">
                 <span id="innerBox" class="fn-PosAbs" style="display:block;height:200px;width:200px;left:0px;top:0px;background:url('../image/bgColor.png') repeat;visibility:hidden;"></span>
-	            <div id="BgImageBox" class="fn-W400 fn-H400 fn-PosAbs" style="top:0px;left:420px;overflow:hidden;visibility:hidden;">
-	            	<div class="fn-PosRel">
-	                	<img id="BgImage" src="../image/bigImage.jpg" style="position:absolute;top:0px;left:0px;">
-	            	</div>
-	            </div>
+                <div id="BgImageBox" class="fn-W400 fn-H400 fn-PosAbs" style="top:0px;left:420px;overflow:hidden;visibility:hidden;">
+                    <div class="fn-PosRel">
+                        <img id="BgImage" src="../image/bigImage.jpg" style="position:absolute;top:0px;left:0px;">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -41,20 +41,22 @@
                 innerBox: null /*document.getElementById("#innerBox")*/ ,
                 BgImage: null /*document.getElementById("#BgImage")*/ ,
                 BgImageBox: null /*document.getElementById("#BgImageBox")*/ ,
-                hideBox:null,
+                hideBox: null,
                 scale: 2
             };
-            
+
             main.outBox.onmouseover = function(e) {
                 me.started.call(me, e)
-                console.log(1111111111,e.target)
             };
-            main.outBox.onmouseout = function(e){
-            	console.log(2222222222,e.target)
-            	 $(main.outBox).off("onmouseover");
-            	 $(me.m.outBox).off("onmousemove");
-            	 me.css(me.m.innerBox,{"visibility": "hidden"});
-            	 me.css(me.m.BgImageBox,{"visibility": "hidden"});
+            main.outBox.onmouseout = function(e) {
+                $(main.outBox).off("onmouseover");
+                $(me.m.outBox).off("onmousemove");
+                me.css(me.m.innerBox, {
+                    "visibility": "hidden"
+                });
+                me.css(me.m.BgImageBox, {
+                    "visibility": "hidden"
+                });
             }
         },
         started: function(e) {
@@ -68,28 +70,33 @@
             var me = this,
                 pageX = e.pageX || (e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)),
                 pageY = e.pageY || (e.clientY + (document.documentElement.scrollTop || document.body.scrollTop));
-        
-           //	console.log(me.m.outBox.clientHeight,me.m.innerBox.offsetHeight,me.m.outBox.offsetTop,me.m.innerBox.offsetHeight / 2 )
             me.css(me.m.innerBox, {
                 "visibility": "visible",
-                // "left": Math.min(
-                //     Math.max(
-                //         pageX - parseInt(me.m.outBox.offsetLeft + (me.m.innerBox.offsetWidth / 2)), 0),
-                //     me.m.outBox.offsetWidth - me.m.innerBox.offsetWidth
-                // ) + "px",
-                // "top": Math.min(
-                //     Math.max(
-                //         pageY - parseInt(me.m.outBox.offsetTop + (me.m.innerBox.offsetHeight / 2)), 0),
-                //     me.m.outBox.offsetHeight - me.m.innerBox.offsetHeight
-                // ) + "px"
-            })
-            me.css(me.m.BgImageBox,{
-            	"visibility":"visible",
-            	// "left":
+                "left": Math.min(
+                    Math.max(
+                        pageX - parseInt(me.m.outBox.offsetLeft + (me.m.innerBox.offsetWidth / 2)), 0),
+                    me.m.outBox.offsetWidth - me.m.innerBox.offsetWidth
+                ) + "px",
+                "top": Math.min(
+                    Math.max(
+                        pageY - parseInt(me.m.outBox.offsetTop + (me.m.innerBox.offsetHeight / 2)), 0),
+                    me.m.outBox.offsetHeight - me.m.innerBox.offsetHeight
+                ) + "px"
+            });
+            
+            me.css(me.m.BgImageBox, {
+                "visibility": "visible"
+            });
+
+            var BgImageLeft = (me.m.innerBox.style.left).replace(/px/, ""),
+                BgImageTop = (me.m.innerBox.style.top).replace(/px/, "");
+
+            me.css(me.m.BgImage, {
+                "left": -(parseInt(BgImageLeft) * me.m.scale) + "px",
+                "top": -(parseInt(BgImageTop) * me.m.scale) + "px"
             })
         },
         css: function(element, props) {
-        	//console.log(props)
             if (props) {
                 for (var i in props) {
                     element.style[i] = props[i];
@@ -103,7 +110,8 @@
             outBox: document.getElementById("outBox"),
             innerBox: document.getElementById("innerBox"),
             BgImage: document.getElementById("BgImage"),
-            BgImageBox: document.getElementById("BgImageBox")
+            BgImageBox: document.getElementById("BgImageBox"),
+            scale: 2
         })
     }
     </script>
