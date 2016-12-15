@@ -39,41 +39,53 @@
     var mainObject = {
         init: function(mainParam) {
             var me = this;
+            //配置参数
             var main = this.m = mainParam ? mainParam : {
-                outBox: null /*document.getElementById("#outBox")*/ ,
-                innerBox: null /*document.getElementById("#innerBox")*/ ,
-                BgImage: null /*document.getElementById("#BgImage")*/ ,
-                BgImageBox: null /*document.getElementById("#BgImageBox")*/ ,
+                outBox: null /*document.getElementById("#outBox")*/ ,//原图b
+                innerBox: null /*document.getElementById("#innerBox")*/,//遮照
+                BgImage: null /*document.getElementById("#BgImage")*/ ,//大图
+                BgImageBox: null /*document.getElementById("#BgImageBox")*/,//大图的父容器
                 hideBox: null,
-                scale: 2
+                scale: 2 //缩放比列
             };
-
-            main.outBox.onmouseover = function(e) {
+            //鼠标移入
+            main.outBox.onmouseenter = function(e) {
+            	//开始事件
                 me.started.call(me, e)
             };
-            main.outBox.onmouseout = function(e) {
-                $(main.outBox).off("onmouseenter");
-                $(me.m.outBox).off("onmouseleave");
+            //鼠标移出
+            main.outBox.onmouseleave = function(e) {
+                //设置遮罩和大图容器的样式
                 me.css(me.m.innerBox, {
                     "visibility": "hidden"
                 });
                 me.css(me.m.BgImageBox, {
                     "visibility": "hidden"
                 });
+            	//解绑所有事件
+                $(main.outBox).off("onmouseenter");
+                $(me.m.outBox).off("onmouseleave");
                  $(main.outBox).off("onmouseleave");
             }
         },
         started: function(e) {
             var me = this;
+            //绑定鼠标移动事件
             me.m.outBox.onmousemove = function(e) {
                 me.move.call(me, e)
             };
 
         },
         move: function(e) {
+        	//配置鼠标位置的变量
             var me = this,
                 pageX = e.pageX || (e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft)),
                 pageY = e.pageY || (e.clientY + (document.documentElement.scrollTop || document.body.scrollTop));
+                //设置遮罩的position的值
+                /*
+					首先遮罩的偏移值计算公式为：鼠标的pageX,pageY的值减去原图的offset值（距离页面body的偏移值）,再减去遮罩一半的宽或者高，使遮罩开始移动时鼠标永远在遮罩的中心位置；
+					然后设置偏移值的最大最小值，最小值：不得小于0 如果小于强制设为0，最大值：不得操作原图容易的宽高减去遮罩的宽和高的差值，如果超过就给它写死最大值；
+                */
             me.css(me.m.innerBox, {
                 "visibility": "visible",
                 "left": Math.min(
@@ -87,19 +99,24 @@
                     me.m.outBox.offsetHeight - me.m.innerBox.offsetHeight
                 ) + "px"
             });
-
+            //现实大图容器
             me.css(me.m.BgImageBox, {
                 "visibility": "visible"
             });
       
             var BgImageLeft = me.m.innerBox.style.left,
                 BgImageTop = me.m.innerBox.style.top;
-
+             //设置大图的偏移值
+             /*
+				按照大图和小图的比例是2：1，
+				然后根据遮罩在原图上的偏移值乘上缩放比列值就得到了精确的大图偏移值！
+             */
             me.css(me.m.BgImage, {
                 "left": -(parseFloat(BgImageLeft) * me.m.scale) + "px",
                 "top": -(parseFloat(BgImageTop) * me.m.scale) + "px"
             })
         },
+        //样式函数
         css: function(element, props) {
             if (props) {
                 for (var i in props) {
@@ -111,6 +128,7 @@
 
         }
     };
+    //加载完成后出发对象的init事件
     window.onload = function() {
         mainObject.init({
             outBox: document.getElementById("outBox"),
