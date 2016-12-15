@@ -20,8 +20,8 @@
 
 <body style="background-color:#ddd">
     <div class="fn-W1000 fn-BGC-FFF fn-H650" style="padding-top:20px;margin:200px auto;">
-        <div class=" fn-H400" style="width:820px;margin:0 auto;border:1px solid #ddd;padding:10px;">
-            <div id="outBox" style="position:relative;width:400px;height:400px;">
+        <div class=" fn-H400 fn-clear" style="width:820px;margin:0 auto;border:1px solid #ddd;padding:10px;">
+            <div id="outBox" style="position:relative;float:left;width:400px;height:400px;">
                 <img src="../image/small1.jpg">
                 <span id="innerBox" class="fn-PosAbs" style="display:block;height:200px;width:200px;left:0px;top:0px;background:url('../image/bgColor.png') repeat;visibility:hidden;"></span>
                 <div id="BgImageBox" class="fn-W400 fn-H400 fn-PosAbs" style="top:0px;left:420px;overflow:hidden;visibility:hidden;">
@@ -29,6 +29,9 @@
                         <img id="BgImage" src="../image/bigImage.jpg" style="position:absolute;top:0px;left:0px;">
                     </div>
                 </div>
+            </div>
+            <div id="pageBox"style="float:left;width:400px;height:400px; margin-left:20px;text-align:center;line-height:400px;" >
+            	这是你吴凯哥哥写的放大镜效果
             </div>
         </div>
     </div>
@@ -49,14 +52,15 @@
                 me.started.call(me, e)
             };
             main.outBox.onmouseout = function(e) {
-                $(main.outBox).off("onmouseover");
-                $(me.m.outBox).off("onmousemove");
+                $(main.outBox).off("onmouseenter");
+                $(me.m.outBox).off("onmouseleave");
                 me.css(me.m.innerBox, {
                     "visibility": "hidden"
                 });
                 me.css(me.m.BgImageBox, {
                     "visibility": "hidden"
                 });
+                 $(main.outBox).off("onmouseleave");
             }
         },
         started: function(e) {
@@ -74,26 +78,26 @@
                 "visibility": "visible",
                 "left": Math.min(
                     Math.max(
-                        pageX - parseInt(me.m.outBox.offsetLeft + (me.m.innerBox.offsetWidth / 2)), 0),
+                        pageX - parseFloat(me.m.outBox.offsetLeft + (me.m.innerBox.offsetWidth / 2)), 0),
                     me.m.outBox.offsetWidth - me.m.innerBox.offsetWidth
                 ) + "px",
                 "top": Math.min(
                     Math.max(
-                        pageY - parseInt(me.m.outBox.offsetTop + (me.m.innerBox.offsetHeight / 2)), 0),
+                        pageY - parseFloat(me.m.outBox.offsetTop + (me.m.innerBox.offsetHeight / 2)), 0),
                     me.m.outBox.offsetHeight - me.m.innerBox.offsetHeight
                 ) + "px"
             });
-            
+
             me.css(me.m.BgImageBox, {
                 "visibility": "visible"
             });
-
-            var BgImageLeft = (me.m.innerBox.style.left).replace(/px/, ""),
-                BgImageTop = (me.m.innerBox.style.top).replace(/px/, "");
+      
+            var BgImageLeft = me.m.innerBox.style.left,
+                BgImageTop = me.m.innerBox.style.top;
 
             me.css(me.m.BgImage, {
-                "left": -(parseInt(BgImageLeft) * me.m.scale) + "px",
-                "top": -(parseInt(BgImageTop) * me.m.scale) + "px"
+                "left": -(parseFloat(BgImageLeft) * me.m.scale) + "px",
+                "top": -(parseFloat(BgImageTop) * me.m.scale) + "px"
             })
         },
         css: function(element, props) {
@@ -103,6 +107,8 @@
                 };
             };
             return element;
+
+
         }
     };
     window.onload = function() {

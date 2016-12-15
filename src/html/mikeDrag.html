@@ -153,7 +153,7 @@
                     targetT = parseFloat(val.style.top),
                     maxleft = parseFloat(width) + targetL,
                     maxTop = parseFloat(height) + targetT;
-
+                    console.log(parseFloat(startItem.style.left))
                 if ((parseFloat(startItem.style.left) >= targetL && parseFloat(startItem.style.left) <= maxleft) && (parseFloat(startItem.style.top) >= targetT && parseFloat(startItem.style.top) <= maxTop)) {
                   	$(val).append('<div  class="item fn-LH100 fn-TAC fn-BGC-FFF">'+$(startItem).text()+'</div>');
                   	$(startItem).remove()
