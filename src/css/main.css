@@ -1080,6 +1080,7 @@ input:disabled.fn-input-text-date{background: #F2F2F2 url("../img/date.png") no-
 /*同类案件*/
 .searchCasebanner {background:url(../img/smCaseBanner.png) repeat-x;font-family: "宋体";overflow:hidden;}
 .bannerImg {float:left;width:210px;height:130px;margin-left:46px;background:url(../img/smcaseAll.png) 0 -48px no-repeat;}
+
 .bannerText {float:left;margin-top:35px;margin-left:25px;font-family:"微软雅黑";}
 .smcaseHanderImg{width:440px;height:45px;background:url(../img/smcaseAll.png) 0 0 no-repeat;}
 .caseSelectIcon{background:url(../img/smcaseAll.png) -214px -50px; no-repeat;margin-left: -10px;text-align: center;font-size: 14px;font-family: "微软雅黑";color:#fff;line-height:30px;}
