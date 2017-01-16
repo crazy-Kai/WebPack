@@ -1,1 +1,1 @@
-require("./src/css/main.css")
+require("./src/css/test.css")

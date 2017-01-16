@@ -2,14 +2,16 @@
   "name": "wukai",
   "version": "1.0.0",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "extract-text-webpack-plugin": "^1.0.1"
+  },
   "devDependencies": {
     "css-loader": "^0.26.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "start": "webpack-dev-server --hot --inline"
   },
   "repository": {
     "type": "git",
