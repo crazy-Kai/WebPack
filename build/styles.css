@@ -22,7 +22,8 @@ button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="but
 /*全局：特殊*/
 /*body{background:#F2F2F2;}*/
 /*home*/
-body{font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',"\5B8B\4F53",sans-serif;}
+html{width:100%;height:100%;}
+body{font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',"\5B8B\4F53",sans-serif;width:100%;height:100%;}
 .fn-W300{width:300px;}
 .fn-H100{height:100px;}
 .fn-BGC-FFF{background-color:#FFF;}
@@ -30,7 +31,21 @@ body{font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',"\5B8B\4F53",sans-serif;}
 .fn-FS14{font-size:20px;}
 .fn-FWB{font-weight:bold;}
 .fn-LH30{line-height:30px;}
-#test{width:900px;margin:0 auto; margin-top: 20px;}
+
+a{color:#666;}
+a:focus{outline:none;text-decoration:none;}
+.fn-clear,.clearfix{zoom:1;}
+.fn-clear:after,.clearfix:after{visibility:hidden;display:block;font-size:0;content:"1";clear:both;height:0;}
+.fn-clear-bottom{overflow:hidden;}
+.fn-clear-bottom:after{display:block;font-size:0;content:"1";clear:both;height:1px;margin-top:-2px;background:none;position:relative;z-index:2;}
+.fn-left{float:left;_display:inline;}
+.fn-right{float:right;_display:inline;}
+.fn-margin-center{margin:0 auto;}
+.fn-ellipsis{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;word-wrap:normal;}
+.fn-word-wrap{word-wrap:break-word;word-break:break-all;white-space:normal;}
+.fn-hide{display:none !important;}
+.fn-hide-input{position:absolute;z-index:-1;}
+
 *新的fn-btn*/
 .fn-btns{display:inline-block;line-height:32px;font-size:14px;font-weight:bold;color:#FFF;border:1px solid #FFF;border-radius:3px;cursor:pointer;padding:0 10px;color:#666;}
 .fn-btn{display:inline-block;text-align:center;line-height:32px;font-size:14px;font-weight:bold;color:#FFF;border:1px solid #FFF;border-radius:3px;cursor:pointer;padding:0 10px;color:#666;}
@@ -494,3 +509,15 @@ body{font: 12px/1.5 tahoma,arial,'Hiragino Sans GB',"\5B8B\4F53",sans-serif;}
 .fn-textarea{border:1px solid #CCC;resize:none;padding:9px;line-height:18px;color:#666;vertical-align:top;overflow:auto;font-family:"\5B8B\4F53"}
 .fn-textarea-li{border-color:#ebebeb;}/*外框淡色版*/
 .fn-select{border:1px solid #CCC;height:30px;line-height:18px;padding:5px 5px 5px 5px;color:#666;}
+#test{width:900px;margin:0 auto; margin-top: 20px;}
+/* iframe测试 */
+#pageView{width:100%;height:100%;}
+.fn-iframeView{height:100%;}
+.fn-iframeView .fn-iframe-head{height:100px;line-height:100px;font-size: 14px;font-weight: bold;text-align: center;}
+.fn-iframeView  .fn-iframe-body {display:table;word-wrap:break-word;word-break:break-all;white-space:normal;table-layout:fixed;width:100%;height:100%;}
+.fn-iframeView  .fn-iframe-body .fn-iframe-left{width:130px;height:100%;overflow: auto;display: table-cell;background-color:#ddd;vertical-align:top;}
+.fn-iframeView  .fn-iframe-body .fn-iframe-right{height:100%;overflow: auto;display: table-cell;background-color:#fff;vertical-align:top;}
+.fn-iframeView .fn-iframe-body a{display:block;}
+.fn-iframeView .fn-iframe-body a:hover{display: block;color:#fff;background-color:blue; }
+
+

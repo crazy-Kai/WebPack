@@ -12,14 +12,16 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");//css 单独打�
 module.exports = {
     devtool: 'eval-source-map',
     cache: true,
-    // entry:"./app.js",
     entry: {
-        app: './app.js',//测试入口文件
+        server:"webpack-dev-server/client?http://localhost:8080",
+        app: './src/pages/reactExercise/app.js',//测试入口文件
+        iframRouterApp :'./src/pages/iframe/iframRouterApp.js',//单页面多视图多入口文件
         common:['react','react-dom','jquery']//公用组件
     },
     output: {
         path: path.resolve("./build"),
         filename: "[name].bundle.js",
+        chunkFilename: '[id].chunk.js',//按需加载的子文件名
         publicPath: "/build"
     },
     module: {
