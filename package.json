@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "copy-webpack-plugin": "^4.0.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "opener": "^1.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "reflux": "^6.0.0",
@@ -19,10 +21,13 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "jsx-loader": "^0.13.2",
     "style-loader": "^0.13.1",
+    "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^1.14.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline"
+    "prestart": "opener http://localhost:8080",
+    "start": "webpack-dev-server --hot --inline",
+    "dist": ""
   },
   "repository": {
     "type": "git",

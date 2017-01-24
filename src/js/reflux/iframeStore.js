@@ -1,5 +1,5 @@
 import Reflux from "reflux";
-import Action from "./iframeAction.js";
+import Action from "./iframeAction";
 import $ from "jquery";
 import path from "path";
 
