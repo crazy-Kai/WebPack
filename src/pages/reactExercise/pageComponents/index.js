@@ -4,15 +4,24 @@
       $ = require('jquery'), 
       ReactDOM = require('react-dom');
 
+      import Bounced from "./bounced";
+      import Reflux from "reflux";
+      import bouncedAction from "../../../js/reflux/bouncedAction";
+      import bouncedStore from "../../../js/reflux/bouncedStore.js";
+    console.log(Bounced,Reflux)
+
   var TableBuild = React.createClass({
-        
+        mixins:[Reflux.connect(bouncedStore,"bouncedStyle")],
     	// 这里可以添加初始化方法
     	//初始化state,与gitDefualtProps方法的区别是，每次实例化创建时都会被调用一次，在这方法里，你已经可以访问到this.props
     	getInitialState:function(){
     		return {
     			data:this.props.data,
     			key : "",
-                value:""
+                value:"",
+                bouncedStyle:{
+                    display:"none"
+                }
     		}
     	},
     	// 此方法对于组建来说只会被调用一次,初始化的props不能被设为一个固定值。
@@ -21,14 +30,18 @@
     			data:[]
     		}
     	},
-        ComponentWillMount:function(){
+        componentWillMount:function(){
+
+              console.log(11111111111)
             //组件 将要加载的时候去做一些事情，比如发送ajax请求获取数据等  
         },
-        ComponentDidMount:function(){
+        componentDidMount:function(){
+              console.log(2222)
             //等dom结构渲染成功后要去做的一些事情，比如获取dom 元素要写在此方法内
-
+  
         },
         componentWillUnmount:function(){
+                   console.log(3333333333)
                 //组件移除之前需要做的一些事情 比如销毁一些插件等
         },
         changeValue:function(e){
@@ -90,7 +103,7 @@
     		//有循环元素的时候必须用key 等于一个变量来区分循环后的每个元素，就相当与给每个tr 加了ID 
     		var self = this,
                 arr = [];
-                console.log(this.state.data)
+                console.log(this.state,this.state.bouncedStyle)
             this.state.data.map(function(v,i){
                 arr.push(<tr key = {i}>
                             <td width="300">
@@ -106,7 +119,8 @@
                         </tr>)
             }.bind(this));
     		return (
-        			<div className="fn-FS16">
+                   <div >
+        			    <div className="fn-FS16 fn-main-style">
         					<div width="100%">
 								<h1 className="fn-TAC fn-LH30 fn-FS16 fn-FWB">React 基础 练习 </h1>
 							</div>	
@@ -146,7 +160,20 @@
                                     })}
                                 </ul>
                             </div>
-					</div>
+                             <div className="fn-MT20">
+                                <button className = "fn-btn fn-btn-default fn-LH28" onClick = {bouncedAction.flag} >
+                                    获取验证码
+                                </button>
+                            </div>
+                           
+                        </div>
+                        
+                         <div  className = "fn-bounced-box" style={this.state.bouncedStyle}>
+                            <Bounced />
+                         </div>
+
+                   </div>
+                  
     			)
     	}
   });

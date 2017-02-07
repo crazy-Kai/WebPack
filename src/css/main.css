@@ -113,7 +113,7 @@ a:focus{outline:none;text-decoration:none;}
 .fn-input-button-org:hover{background:#f6972c;}
 .fn-input-button-disabled:hover{background:#CCC;cursor:not-allowed}
 /*子类*/
-.fn-input-button-small{height:28px;line-height:28px;}
+.fn-input-button-small{height:30px;line-height:30px;}
 .fn-input-button:active,
 .fn-input-button-small:active{background:#036099}
 .fn-input-button:focus,

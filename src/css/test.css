@@ -457,6 +457,42 @@ a:focus{outline:none;text-decoration:none;}
 .fn-display-inlineBlock{float:left;}
 .fn-disInBl{display:inline-block;}
 .fn-disBl{display:block;}
+
+/*基类*/
+.fn-input-button,
+.fn-input-button-small,
+.fn-input-button-org,
+.fn-input-button-gray,
+.fn-input-button-darkgray,
+.fn-input-button-gray-small,
+.fn-input-button-disabled{display:inline-block;text-align:center;line-height:34px;font-size:14px;font-weight:bold;color:#FFF;background:#047dc6;border:none;border-radius:3px;cursor:pointer;}
+.fn-input-button:hover,
+.fn-input-button:hover,
+.fn-input-button-small:hover,
+.fn-input-button-org:hover,
+.fn-input-button-disabled:hover{text-decoration:none;background:#047dc6;color:#FFF;}
+.fn-input-button-org:hover{background:#f6972c;}
+.fn-input-button-disabled:hover{background:#CCC;cursor:not-allowed}
+/*子类*/
+.fn-input-button-small{height:32px;line-height:32px;}
+.fn-input-button:active,
+.fn-input-button-small:active{background:#036099}
+.fn-input-button:focus,
+.fn-input-button-small:focus{color:#FFF;}
+.fn-input-button-org{background:#f6972c}
+.fn-input-button-org:active{background:#F70;}
+.fn-input-button-org:focus{color:#FFF;}
+.fn-input-button-darkgray{background:#CCCCCC;color:#666666}
+.fn-input-button-darkgray:hover{text-decoration:none;}
+.fn-input-button-gray,
+.fn-input-button-gray-small{height:30px;line-height:30px;border-radius:0;background:#f2f2f2;border:1px solid #CCC;color:#666;}
+.fn-input-button-gray:active,
+.fn-input-button-gray-small:active{background:#EEE;}
+.fn-input-button-gray-small{font-size:12px;font-weight:normal;line-height:28px;}
+.fn-input-button-disabled{background:#CCC;}
+.fn-input-button-disabled:active{background:#BBB;}
+.fn-input-button-disabled:focus{color:#FFF;}
+
 /*table基类*/
 .fn-table-input-middle,
 .fn-table-input-small,
@@ -509,7 +545,7 @@ a:focus{outline:none;text-decoration:none;}
 .fn-textarea{border:1px solid #CCC;resize:none;padding:9px;line-height:18px;color:#666;vertical-align:top;overflow:auto;font-family:"宋体"}
 .fn-textarea-li{border-color:#ebebeb;}/*外框淡色版*/
 .fn-select{border:1px solid #CCC;height:30px;line-height:18px;padding:5px 5px 5px 5px;color:#666;}
-#test{width:900px;margin:0 auto; margin-top: 20px;}
+
 /* iframe测试 */
 #pageView{width:100%;height:100%;}
 .fn-iframeView{height:100%;}
@@ -521,4 +557,11 @@ a:focus{outline:none;text-decoration:none;}
 .fn-iframeView .fn-iframe-body a:hover{display: block;color:#fff;background-color:blue; }
 .fn-iframeView .fn-iframe-body a.ch-active{display: block;color:#fff;background-color:blue;}
 
+/* 获取验证码样式 */
+.fn-bounced{position:fixed;background-color: #000;width:100%;height:100%;top:0;opacity: 0.5;}
+.fn-main-style{width:900px;margin:0 auto; margin-top: 20px;}
+.fn-bounced-main{position: absolute;box-sizing:border-box;width: 400px;height:300px;background-color:#fff;left:50%;top:50%;margin-top: -150px;margin-left:-150px;z-index: 9999;opacity:1;padding: 20px;}
+.fn-bounced-main .fn-bounced-title{ height:30px; font-size: 16px;color: #000;font-family: Arial;line-height: 30px;text-align: center;}
+.fn-bounced-main .fn-bounced-icon {display: block;width:20px;height:15px;position: absolute;top:0;right: 0;text-align: center;font-weight: bold;}
+.fn-bounced-box{width: 100%;overflow: hidden;}
 
