@@ -8,6 +8,7 @@
     "opener": "^1.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-mixin": "^3.0.5",
     "reflux": "^6.0.0",
     "webpack-dev-server": "^1.16.2"
   },

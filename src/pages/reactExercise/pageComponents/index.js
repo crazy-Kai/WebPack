@@ -1,181 +1,103 @@
-
-  //依赖
-  var React = require('react'),
-      $ = require('jquery'), 
-      ReactDOM = require('react-dom');
-
+ //依赖
+      import $ from "jquery";
+      import ReactDOM from "react-dom";
+      import React from "react";
       import Bounced from "./bounced";
       import Reflux from "reflux";
-      import bouncedAction from "../../../js/reflux/bouncedAction";
-      import bouncedStore from "../../../js/reflux/bouncedStore.js";
-    console.log(Bounced,Reflux)
+      import tableAction from "../../../js/reflux/tableAction";
+      import tableStore from "../../../js/reflux/tableStore.js";
+      import dialogAction from "../../../js/reflux/dialogAction";
+      import ReactMixin from "react-mixin"; 
+    
+      class TableBuild extends React.Component{
+            constructor(props) {
+                //实例化父类,继承父类构造函数,如果不写此方法会报错
+                super(props)
+                this.props = props;
+                console.log(this)
+            }
 
-  var TableBuild = React.createClass({
-        mixins:[Reflux.connect(bouncedStore,"bouncedStyle")],
-    	// 这里可以添加初始化方法
-    	//初始化state,与gitDefualtProps方法的区别是，每次实例化创建时都会被调用一次，在这方法里，你已经可以访问到this.props
-    	getInitialState:function(){
-    		return {
-    			data:this.props.data,
-    			key : "",
-                value:"",
-                bouncedStyle:{
-                    display:"none"
-                }
-    		}
-    	},
-    	// 此方法对于组建来说只会被调用一次,初始化的props不能被设为一个固定值。
-    	getDefualtProps:function(){
-    		return {
-    			data:[]
-    		}
-    	},
-        componentWillMount:function(){
+            render(){
+                //这里可以设置变量
+                    //有循环元素的时候必须用key 等于一个变量来区分循环后的每个元素，就相当与给每个tr 加了ID 
+                    let self = this,
+                        arr = [];
+                        console.log(this.state)
+                    this.state.data.data.map(function(v,i){
+                        arr.push(<tr key = {i}>
+                                    <td width="300">
+                                        {++i}
+                                    </td >
+                                    <td width="300">
+                                        {v.name}
+                                    </td>
+                                    <td>
+                                        <button className="fn-btn fn-btn-primary fn-MR10" data-index = {i} onClick = {tableAction.modify} >编辑</button>
+                                        <button className="fn-btn fn-btn-primary" data-index = {i} onClick = {tableAction.delete}  >删除</button>
+                                    </td>
+                                </tr>)
+                    }.bind(this));
+                    return (
+                           <div >
+                                <div className="fn-FS16 fn-main-style">
+                                    <div width="100%">
+                                        <h1 className="fn-TAC fn-LH30 fn-FS16 fn-FWB " >React 基础 练习 </h1>
+                                    </div>  
+                                    <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="300">
+                                                    序号
+                                                </th>
+                                                <th width="300">
+                                                    名字
+                                                </th>
+                                                <th>
+                                                    操作
+                                                </th>   
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-              console.log(11111111111)
-            //组件 将要加载的时候去做一些事情，比如发送ajax请求获取数据等  
-        },
-        componentDidMount:function(){
-              console.log(2222)
-            //等dom结构渲染成功后要去做的一些事情，比如获取dom 元素要写在此方法内
-  
-        },
-        componentWillUnmount:function(){
-                   console.log(3333333333)
-                //组件移除之前需要做的一些事情 比如销毁一些插件等
-        },
-        changeValue:function(e){
-            this.setState({
-                value:e.target.value
-            })
-        },
-    	//根据循环state得到的数组中每个元素的下表index ,来删除指定的元素
-    	deleteName:function(e){
-    		var self = this,
-    		     index = $(e.target).attr("data-index"),
-    		     data = self.state.data;
-    		     data.splice(index-1,1);
-    		     self.setState({data:data});
-    	},
-    	//修改名字，点击编辑的时候把当前点击的元素的下标取出来保存到组建的state里，方便以下的保存操作，利用ref属性通过ReactDOM.findDOMNode(this.refs.myInput)的方法获取元素的DOM节点,方便操作
-    	editName:function(e){
-    		var index = $(e.target).attr("data-index"),
-    		    keys = index -1,
-    			self = this,
-    			input = ReactDOM.findDOMNode(self.refs.myInput);
-            
-   			    input.value = self.state.data[keys].name;
-   			    input.nextSibling.textContent = "保存";
-  				input.focus();
-    			self.setState({key:keys});
-              
-                self.setState({value:self.state.data[keys].name})
-    	},
-    	//保存修改//新增
-    	addName:function(e){
-    		var textName = e.target.textContent,
-    			self = this,
-    		    data = self.state.data,
-    		    //取出 点击编辑后保存在state里的key(下标);
-    		    key = self.state.key,
-    		    input = ReactDOM.findDOMNode(self.refs.myInput);
+                                            {arr}
+                                        </tbody>    
 
-                // input = self.refs.myInput.getDOMNode();
-                // console.log(input)
+                                    </table>
 
-                // input = self.refs.myInput.getDOMNode();
+                                    <div className = "fn-MT20 fn-W300 fn-LH30 fn-MT20 ">
 
-    		   if(textName === "保存"){
-    		   	  data[key].name =  input.value;
-    		   	  self.setState({data:data});
-    		   	  e.target.textContent = "增加";
-                  self.setState({value:""})
-    		   };
-    		   if(textName === "增加"){
-    		   	data.push({name: input.value});
-    		   	self.setState({data:data});
-                self.setState({value:""})   
-    		    
-    		   }
-    	},
-    	render:function(){
-    		//这里可以设置变量
-    		//有循环元素的时候必须用key 等于一个变量来区分循环后的每个元素，就相当与给每个tr 加了ID 
-    		var self = this,
-                arr = [];
-                console.log(this.state,this.state.bouncedStyle)
-            this.state.data.map(function(v,i){
-                arr.push(<tr key = {i}>
-                            <td width="300">
-                                {++i}
-                            </td >
-                            <td width="300">
-                                {v.name}
-                            </td>
-                            <td>
-                                <button className="fn-btn fn-btn-primary fn-MR10" data-index = {i} onClick = {self.editName} >编辑</button>
-                                <button className="fn-btn fn-btn-primary" data-index = {i} onClick = {self.deleteName}  >删除</button>
-                            </td>
-                        </tr>)
-            }.bind(this));
-    		return (
-                   <div >
-        			    <div className="fn-FS16 fn-main-style">
-        					<div width="100%">
-								<h1 className="fn-TAC fn-LH30 fn-FS16 fn-FWB">React 基础 练习 </h1>
-							</div>	
-		        			<table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
-		        				<thead>
-		        					<tr>
-		        						<th width="300">
-		        							序号
-		        						</th>
-		        						<th width="300">
-		        							名字
-		        						</th>
-		        						<th>
-		        						  	操作
-		        						</th>	
-		        					</tr>
-		        				</thead>
-		        				<tbody>
+                                        <input  ref="myInput"  value={this.state.data.value} onChange={tableAction.changeValue} type="text" className="fn-input-text" placeholder="请输入姓名" maxLength="20"/>
+                                        <button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff"}}   onClick = {tableAction.add}>增加</button>
 
-		        					{arr}
-		        				</tbody>	
+                                    
+                                    </div>
+                                    <div className="fn-MT20">
+                                        <ul>
 
-		        			</table>
+                                            {React.Children.map(this.props.children,function(p){
+                                                return (<li>{p}</li>)
+                                            })}
+                                        </ul>
+                                    </div>
+                                     <div className="fn-MT20">
+                                        <button className = "fn-btn fn-btn-default fn-LH28" onClick={dialogAction.switchShow} >
+                                            获取验证码
+                                        </button>
+                                    </div>
+                                   
+                                </div>
+                                
+                                 <div  className = "fn-bounced-box" >
+                                    <Bounced  time="60"/>
+                                 </div>
 
-		        			<div className = "fn-MT20 fn-W300 fn-LH30 fn-MT20 ">
+                           </div>
+                          
+                        )
+            }
 
-								<input  ref="myInput"  value={this.state.value} onChange={this.changeValue} type="text" className="fn-input-text" placeholder="请输入姓名" maxLength="20"/>
-								<button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff"}}   onClick = {self.addName}>增加</button>
-
-							
-							</div>
-                            <div className="fn-MT20">
-                                <ul>
-
-                                    {React.Children.map(this.props.children,function(p){
-                                        return (<li>{p}</li>)
-                                    })}
-                                </ul>
-                            </div>
-                             <div className="fn-MT20">
-                                <button className = "fn-btn fn-btn-default fn-LH28" onClick = {bouncedAction.flag} >
-                                    获取验证码
-                                </button>
-                            </div>
-                           
-                        </div>
-                        
-                         <div  className = "fn-bounced-box" style={this.state.bouncedStyle}>
-                            <Bounced />
-                         </div>
-
-                   </div>
-                  
-    			)
-    	}
-  });
-
-module.exports = TableBuild;
+      }
+ 
+export default  TableBuild;
+//mixins
+ReactMixin.onClass(TableBuild, Reflux.connect(tableStore,'data'))
