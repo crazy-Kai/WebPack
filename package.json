@@ -21,6 +21,7 @@
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "jsx-loader": "^0.13.2",
+    "redux": "^3.6.0",
     "style-loader": "^0.13.1",
     "transfer-webpack-plugin": "^0.1.4",
     "webpack": "^1.14.0"

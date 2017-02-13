@@ -8,7 +8,7 @@ var webpack = require("webpack"),
 var compiler = webpack(config);
 //启动webpack-dev-server
 var server = new  WebpackDevServer(compiler, {
-    publicPath: "http://localhost:8080/build",
+    publicPath: "http://localhost:8080/dist/build",
     historyApiFallback: true,
     hot: true,//开启hot 
     inline: true
