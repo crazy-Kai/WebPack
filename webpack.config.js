@@ -17,6 +17,7 @@ module.exports = {
     cache: true,
     entry: {
         app: './src/pages/reactExercise/app.js', //测试入口文件
+        reduxApp:"./src/pages/reactExercise/reduxApp.js",//用redex写法入口文件
         iframRouterApp: './src/pages/iframe/iframRouterApp.js', //单页面多视图多入口文件
         reactRouterApp:"./src/pages/reactRouter/reactRouterApp.js",
         common: ['react', 'react-dom', 'jquery', 'reflux'] //公用组件

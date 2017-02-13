@@ -23,6 +23,7 @@
                     let self = this,
                         arr = [];
                         console.log(this.state)
+                     document.title = "页面title 可以用document.title属性来设定"   
                     this.state.data.data.map(function(v,i){
                         arr.push(<tr key = {i}>
                                     <td width="300">
