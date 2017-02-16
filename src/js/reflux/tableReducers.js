@@ -11,12 +11,14 @@ const initialState =  {
 const getData =  (state = initialState,action) =>{
        switch (action.type){
        	 case "addItem":
+       	 console.log($(action.item.target))
+       	
        	  return $.extend({},state,
               {
               	data:[
               	 ...state.data,
               	 	{	
-	              	 	name:action.item,
+	              	 	name:$(action.item.target).data("value"),
 	              		id:state.data.reduce((firstItem,curItem) => Math.max(curItem.id,firstItem),-1)+1
               	 	}
               	]
@@ -24,6 +26,14 @@ const getData =  (state = initialState,action) =>{
               }
        	   	)
        	   break;
+       	   // case "deleteItem":
+       	   //  return $.extend({},state,{
+       	    	
+       	   //  })
+       	   case "changeValue":
+       	    return $.extend({},state,{
+       	    	value:$(action.val.target).val()
+       	    })
        	   default: 
              return state
 
