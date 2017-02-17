@@ -5,12 +5,16 @@
      import  {bindActionCreators} from "redux" ;
      //这里的 *号 as 表示引入文件的所有action
      import * as Actions from "../../../js/reflux/tableReduxAction";
-
-
+     import Reducers from "../../../js/reflux/tableReducers";
+     import {createStore} from "redux";
+     //store
+     let store = createStore(Reducers);
+    
      class TableBuild extends React.Component{
                 constructor(props) {
                     //实例化父类,继承父类构造函数,如果不写此方法会报错
                     super(props)
+                    this.props = props;
                 }
                 
                 render(){
@@ -19,10 +23,11 @@
                         let self = this,
                             arr = [],
                             action = this.props.action;
-                          console.log(this.props)
+                         console.log(this.props)
                         //  document.title = "页面title 可以用document.title属性来设定"   
                         this.props.tableData.data.map(function(v,i){
-                            arr.push(<tr key = {i} id={v.id}>
+
+                            arr.push(<tr key = {i} >
                                         <td width="300">
                                             {++i}
                                         </td >
@@ -30,7 +35,7 @@
                                             {v.name}
                                         </td>
                                         <td>
-                                            <button className="fn-btn fn-btn-primary fn-MR10" data-index = {i} >编辑</button>
+                                            <button className="fn-btn fn-btn-primary fn-MR10" data-index = {v.id}  data-value={v.name} onClick={action.modifyItems}>编辑</button>
                                             <button className="fn-btn fn-btn-primary" data-index = {v.id} onClick = {action.deleteItem} >删除</button>
                                         </td>
                                     </tr>)
@@ -62,16 +67,15 @@
 
                                         </table>
 
-                                        <div className = "fn-MT20 fn-W300 fn-LH30 fn-MT20 ">
-
+                                        <div className = "fn-MT20  fn-LH30 fn-MT20 ">
+											
                                             <input  type="text" value={this.props.tableData.value} className="fn-input-text" placeholder="请输入姓名" maxLength="20" onChange={action.changeValue}/>
-                                            <button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff"}}  data-key = {this.props.tableData.key} data-value = {this.props.tableData.value} onClick={action.addItems} >增加</button>
-
-                                        
+                                            <button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff",verticalAlign:"1px"}}  data-key = {this.props.tableData.key} data-value = {this.props.tableData.value} onClick={action.addItems} >{this.props.tableData.addItem}</button>
+                                             <input type="text"  className="fn-input-text fn-ML20" placeholder="查询" onChange={action.queryItem}/>
+                                         
                                         </div>
                                         <div className="fn-MT20">
                                             <ul>
-
                                                 {React.Children.map(this.props.children,function(p){
                                                     return (<li>{p}</li>)
                                                 })}
@@ -86,7 +90,6 @@
                                     </div>
                                     
                                    
-
                                </div>
                               
                             )
@@ -94,8 +97,6 @@
 
      }
 
-     TableBuild.propTypes = {
-     	tableData:React.PropTypes.object.isRequired
-     }
+     
 
-     export default connect( state => ({tableData:state.getData}), dispatch => ({ action:bindActionCreators(Actions,dispatch) }))(TableBuild)
+     export default connect( state => ({tableData:state.getData}), dispatch => ({ action:bindActionCreators(Actions, dispatch) }))(TableBuild)
