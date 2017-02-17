@@ -66,7 +66,18 @@ const getData =  (state = initialState,action) =>{
        }
 
     };
-const tableApp = combineReducers({getData});
+const nowValue = "";
+
+const what = (state = nowValue,action) =>{
+	switch (action.type){
+		case "queryItem":
+		return action.val;
+		break;
+		default:
+		 return state;
+	}
+}   
+const tableApp = combineReducers({getData,what});
 //每当触发action 掉用reducers后会更新store中的state树!
 
 export default tableApp;
