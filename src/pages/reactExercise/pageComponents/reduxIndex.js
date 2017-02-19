@@ -50,7 +50,8 @@
                                         <div width="100%">
                                             <h1 className="fn-TAC fn-LH30 fn-FS16 fn-FWB " >React 基础 练习 </h1>
                                         </div>  
-                                        <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
+                                        {
+                                            arr.length?<table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th width="300">
@@ -65,12 +66,37 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-													{arr}
+                                                   {arr}
+                                                    
                                               
                                             </tbody>    
 
-                                        </table>
+                                            </table>: <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th >
+                                                        序号
+                                                    </th>
+                                                    <th>
+                                                        名字
+                                                    </th>
+                                                    <th>
+                                                        操作
+                                                    </th>   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                   <tr>
+                                                      <td colSpan="3" style={{textAlign:"center"}}>没查询到任何数据</td>
+
+                                                   </tr>
+                                                    
+                                              
+                                            </tbody>    
+
+                                            </table>
+                                        }
+                                        
 
                                         <div className = "fn-MT20  fn-LH30 fn-MT20 ">
 											<span style={this.props.tableData.boxStyle}>
