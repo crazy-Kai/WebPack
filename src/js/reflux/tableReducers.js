@@ -8,19 +8,21 @@ const initialState =  {
         key: null,
         value: "",
         addItem:"增加"
+        ,boxStyle:{display:"block"},
+        buttonStyle:{display:"inline-block"}
     }
     
 const getData =  (state = initialState,action) =>{
        switch (action.type){
        	 case "addItem":
        	 if(state.key === null){
-
+       	 	console.log($(action.item.target).data("value"))
 	       	  return $.extend({},state,
 	              {
 	              	data:[
 	              	 ...state.data,
 	              	 	{	
-		              	 	name:$(action.item.target).data("value"),
+		              	 	name:state.value,
 		              		id:state.data.reduce((firstItem,curItem) => Math.max(curItem.id,firstItem),-1)+1
 	              	 	}
 	              	],
@@ -35,6 +37,7 @@ const getData =  (state = initialState,action) =>{
 	       	 	return $.extend({},state,{
 	       	 		data:state.data,
 	       	 		value:"",
+	       	 		key:null,
 	       	 		addItem:"增加"
 	       	 	})
        	 }
@@ -47,6 +50,7 @@ const getData =  (state = initialState,action) =>{
        	    break;
 
        	   case "changeValue":
+
 	       	    return $.extend({},state,{
 	       	    	value:$(action.val.target).val()
 	       	    });
@@ -68,7 +72,7 @@ const getData =  (state = initialState,action) =>{
     };
 const nowValue = "";
 
-const what = (state = nowValue,action) =>{
+const filter  = (state = nowValue,action) =>{
 	switch (action.type){
 		case "queryItem":
 		return action.val;
@@ -77,7 +81,7 @@ const what = (state = nowValue,action) =>{
 		 return state;
 	}
 }   
-const tableApp = combineReducers({getData,what});
+const tableApp = combineReducers({getData,filter});
 //每当触发action 掉用reducers后会更新store中的state树!
 
 export default tableApp;
