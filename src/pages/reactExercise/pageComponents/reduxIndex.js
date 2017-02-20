@@ -51,7 +51,9 @@
                                             <h1 className="fn-TAC fn-LH30 fn-FS16 fn-FWB " >React 基础 练习 </h1>
                                         </div>  
                                         {
-                                            arr.length?<table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
+                                            arr.length?
+
+                                            <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th width="300">
@@ -71,7 +73,9 @@
                                               
                                             </tbody>    
 
-                                            </table>: <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
+                                            </table>:
+                                             
+                                            <table className="fn-table fn-table-text fn-table-border fn-MT20" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th >
@@ -101,7 +105,7 @@
                                         <div className = "fn-MT20  fn-LH30 fn-MT20 ">
 											<span style={this.props.tableData.boxStyle}>
                                                 <input  type="text" value={this.props.tableData.value} className="fn-input-text" placeholder="请输入姓名" maxLength="20" onChange={action.changeValue}/>
-                                                <button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff",verticalAlign:"-1px"}}  data-key = {this.props.tableData.key} data-value = {this.props.tableData.value} onClick={action.addItems} >{this.props.tableData.addItem}</button>
+                                                <button className="fn-btn fn-btn-default fn-LH28" style={{backgroundColor:"#047dc6",height:"33px",verticalAlign:"-1px",color:"#fff",verticalAlign:"1px"}}  data-key = {this.props.tableData.key} data-value = {this.props.tableData.value} onClick={action.addItems} >{this.props.tableData.addItem}</button>
                                             </span>
                                             
 
